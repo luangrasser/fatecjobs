@@ -25,9 +25,6 @@ public class Teste implements Notificavel {
 	private List<Questao> questoes;
 
 	@ManyToOne
-	private Empresa empresa;
-
-	@ManyToOne
 	private Aluno aluno;
 
 	@ManyToOne

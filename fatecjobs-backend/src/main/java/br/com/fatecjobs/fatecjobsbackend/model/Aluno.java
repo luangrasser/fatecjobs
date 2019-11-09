@@ -23,7 +23,7 @@ public class Aluno implements Serializable {
 	private Integer id;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
-	private Set<Competencia> competencias;
+	private List<Competencia> competencias;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
 	private List<Indicacao> indicacao;
