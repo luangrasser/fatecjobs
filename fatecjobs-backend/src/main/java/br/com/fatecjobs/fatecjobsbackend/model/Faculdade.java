@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -25,10 +24,6 @@ public class Faculdade implements Serializable {
 
 	private String nome;
 
-	private String curso;
-
-	private LocalDateTime dataInicio;
-
-	private LocalDateTime dataPrevistaTermino;
+	private Cidade cidade;
 
 }

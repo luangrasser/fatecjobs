@@ -7,6 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -23,6 +24,8 @@ public class FaculdadeAluno implements Serializable {
 
 	@NotBlank
 	private String curso;
+
+	private LocalDate dataConclusao;
 
 	@ManyToOne
 	private Aluno aluno;

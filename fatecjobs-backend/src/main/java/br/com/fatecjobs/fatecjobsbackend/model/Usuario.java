@@ -7,11 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
@@ -26,17 +24,14 @@ public abstract class Usuario implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank
 	private String nome;
 
-	@NotBlank
 	private String email;
 
-	@NotBlank
 	private String senha;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Conexao> conexoes;
+	private List<Conexao> conexoes;
 
 	@ManyToOne
 	private TipoUsuario tipoUsuario;
