@@ -31,8 +31,20 @@ public class Vaga implements Serializable {
 	@NotBlank
 	private String descricao;
 
-	@OneToMany
-	private Set<Competencia> competenciasExigidas;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vaga", orphanRemoval = true)
+	private List<CompetenciaVaga> competenciasExigidas;
+
+	@Column(columnDefinition = "bit(1) default 1", nullable = false)
+	private boolean ativo = true;
+
+	@ManyToOne
+	private Empresa empresa;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vaga", orphanRemoval = true)
+	private List<AlunoVaga> candidatos;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vaga", orphanRemoval = true)
+	private List<Teste> testeAplicados;
 
 	private String nivelExperiencia;
 
@@ -41,17 +53,5 @@ public class Vaga implements Serializable {
 	private String tipoEmprego;
 
 	private String funcoesTrabalho;
-
-	@Column(columnDefinition = "bit(1) default 1", nullable = false)
-	private boolean ativo = true;
-
-	@ManyToOne
-	private Empresa empresa;
-
-	@ManyToMany
-	private List<Aluno> candidatos;
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vaga", orphanRemoval = true)
-	private List<Teste> testeAplicados;
 
 }

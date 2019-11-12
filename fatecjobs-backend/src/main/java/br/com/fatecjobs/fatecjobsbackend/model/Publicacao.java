@@ -27,8 +27,8 @@ public class Publicacao implements Notificavel {
 	@ManyToOne
 	private Usuario usuario;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Usuario> curtidasUsuario;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "publicacao", orphanRemoval = true)
+	private List<CurtidaUsuario> curtidasUsuario;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "publicacao", orphanRemoval = true)
 	private List<Comentario> comentario;

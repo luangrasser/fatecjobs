@@ -7,7 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -27,7 +27,10 @@ public class Questao implements Serializable {
     @NotBlank
     private String enunciado;
 
-    private List<String> alternativas;
+    @ElementCollection
+    @CollectionTable(name = "questao_alternativa", joinColumns = @JoinColumn(name = "questao_id"))
+    @Column(name = "alternativa")
+    private Set<String> alternativas;
 
     private String respostaCorreta;
 

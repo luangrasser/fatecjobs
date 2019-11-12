@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
@@ -18,6 +17,10 @@ public class Indicacao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
 	@NotBlank
 	private String descricao;
 
@@ -25,7 +28,7 @@ public class Indicacao implements Serializable {
 	private Integer nivel = 3;
 
 	@ManyToOne
-	private Usuario aluno;
+	private Aluno aluno;
 
 	@ManyToOne
 	private Professor professor;

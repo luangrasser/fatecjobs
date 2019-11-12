@@ -22,17 +22,17 @@ public class Aluno implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno", orphanRemoval = true)
 	private List<Competencia> competencias;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno", orphanRemoval = true)
 	private List<Indicacao> indicacao;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "aluno", orphanRemoval = true)
 	private List<FaculdadeAluno> listaFaculdades;
 
-	@ManyToMany
-	private List<Vaga> vagas;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "aluno", orphanRemoval = true)
+	private List<AlunoVaga> vagas;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "aluno", orphanRemoval = true)
 	private List<Teste> testesRealizados;

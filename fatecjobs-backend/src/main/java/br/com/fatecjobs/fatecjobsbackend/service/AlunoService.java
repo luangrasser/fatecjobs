@@ -27,7 +27,7 @@ public class AlunoService {
     public Aluno salvar(AlunoForm form) {
         Aluno aluno = form.convert();
         aluno.setUsuario(usuarioService.criarUsuario(form));
-        aluno.setCompetencias(competenciaService.criarListaCompetencias(form, aluno.getUsuario()));
+        aluno.setCompetencias(competenciaService.criarListaCompetencias(form, aluno));
         Aluno alunoSalvo = alunoRepository.save(aluno);
         faculdadeAlunoService.criarFaculdadeAluno(form, alunoSalvo);
         return alunoSalvo;

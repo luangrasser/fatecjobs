@@ -1,8 +1,6 @@
 package br.com.fatecjobs.fatecjobsbackend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,13 +8,14 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
-public abstract class Usuario implements UserDetails {
+public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,8 +29,9 @@ public abstract class Usuario implements UserDetails {
 
 	private String senha;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Conexao> conexoes;
+	@Transient
+	@Getter(AccessLevel.NONE)
+	private Set<Conexao> conexoes;
 
 	@ManyToOne
 	private TipoUsuario tipoUsuario;
@@ -75,6 +75,10 @@ public abstract class Usuario implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public Set<Conexao> getConexoes() {
+		return null;
 	}
 
 }
