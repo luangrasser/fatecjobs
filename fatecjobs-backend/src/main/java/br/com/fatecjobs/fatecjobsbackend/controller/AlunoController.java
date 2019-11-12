@@ -21,7 +21,7 @@ public class AlunoController {
 
     @PostMapping("/salvar")
     @Transactional
-    public ResponseEntity<Aluno> salvar(@RequestParam @Valid AlunoForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<Aluno> salvar(@RequestBody @Valid AlunoForm form, UriComponentsBuilder uriBuilder) {
         try {
             Aluno aluno = alunoService.salvar(form);
             URI uri = uriBuilder.path("/aluno/{id}").buildAndExpand(aluno.getId()).toUri();

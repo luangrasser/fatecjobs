@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -24,6 +21,7 @@ public class Faculdade implements Serializable {
 
 	private String nome;
 
+	@ManyToOne
 	private Cidade cidade;
 
 }
