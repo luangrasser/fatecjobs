@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AlunoService {
@@ -24,11 +25,12 @@ public class AlunoService {
     @Autowired
     private FaculdadeAlunoService faculdadeAlunoService;
 
+    @Transactional
     public Aluno salvar(AlunoForm form) {
         Aluno aluno = form.convert();
         aluno.setUsuario(usuarioService.criarUsuario(form));
-        aluno.setCompetencias(competenciaService.criarListaCompetencias(form, aluno));
         Aluno alunoSalvo = alunoRepository.save(aluno);
+        alunoSalvo.setCompetencias(competenciaService.criarListaCompetencias(form, alunoSalvo));
         faculdadeAlunoService.criarFaculdadeAluno(form, alunoSalvo);
         return alunoSalvo;
     }

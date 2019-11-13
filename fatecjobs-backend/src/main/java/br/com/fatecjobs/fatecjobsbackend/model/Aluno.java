@@ -1,9 +1,7 @@
 package br.com.fatecjobs.fatecjobsbackend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import org.apache.tomcat.util.buf.StringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +12,7 @@ import java.util.Set;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Aluno implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -40,4 +39,25 @@ public class Aluno implements Serializable {
 	@ManyToOne
 	private Usuario usuario;
 
+	public String getTipoUsuario() {
+		if (usuario != null && usuario.getTipoUsuario() != null) {
+			return usuario.getTipoUsuario().getDescricao();
+		}
+		return null;
+	}
+
+	public String getNome() {
+		return usuario != null ? usuario.getNome() : null;
+	}
+
+	public String getEmail() {
+		return usuario != null ? usuario.getEmail() : null;
+	}
+
+	public String getNomeCidade() {
+		if (usuario != null && usuario.getCidade() != null) {
+			return usuario.getCidade().getNome();
+		}
+		return null;
+	}
 }

@@ -1,5 +1,6 @@
 package br.com.fatecjobs.fatecjobsbackend.controller;
 
+import br.com.fatecjobs.fatecjobsbackend.dto.AlunoDto;
 import br.com.fatecjobs.fatecjobsbackend.form.AlunoForm;
 import br.com.fatecjobs.fatecjobsbackend.model.Aluno;
 import br.com.fatecjobs.fatecjobsbackend.service.AlunoService;
@@ -20,12 +21,11 @@ public class AlunoController {
     private AlunoService alunoService;
 
     @PostMapping("/salvar")
-    @Transactional
-    public ResponseEntity<Aluno> salvar(@RequestBody @Valid AlunoForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<AlunoDto> salvar(@RequestBody @Valid AlunoForm form, UriComponentsBuilder uriBuilder) {
         try {
             Aluno aluno = alunoService.salvar(form);
             URI uri = uriBuilder.path("/aluno/{id}").buildAndExpand(aluno.getId()).toUri();
-            return ResponseEntity.created(uri).body(aluno);
+            return ResponseEntity.created(uri).body(new AlunoDto(aluno));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

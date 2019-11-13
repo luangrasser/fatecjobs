@@ -15,7 +15,7 @@ public class FaculdadeAlunoService {
     @Autowired
     private FaculdadeService faculdadeService;
 
-    public FaculdadeAluno criarFaculdadeAluno(AlunoForm form, Aluno aluno) {
+    public void criarFaculdadeAluno(AlunoForm form, Aluno aluno) {
         FaculdadeAluno faculdadeAluno = FaculdadeAluno.builder()
                 .aluno(aluno)
                 .faculdade(faculdadeService.findByNome(form.getFaculdade()))
@@ -23,6 +23,7 @@ public class FaculdadeAlunoService {
                 .concluida(form.getConcluida().equals("Sim"))
                 .dataConclusao(form.getDataConclusao())
                 .build();
-        return faculdadeAlunoRepository.save(faculdadeAluno);
+        faculdadeAlunoRepository.save(faculdadeAluno);
     }
+
 }

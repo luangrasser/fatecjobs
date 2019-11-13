@@ -18,7 +18,7 @@ public class CompetenciaService {
 
     public List<Competencia> criarListaCompetencias(AlunoForm form, Aluno aluno) {
         List<Competencia> competencias = new ArrayList<>();
-        if (!form.getCompetencias().isEmpty()) {
+        if (form.getCompetencias() != null && !form.getCompetencias().isEmpty()) {
             form.getCompetencias().forEach((key, value) -> {
                 Competencia competencia = Competencia.builder()
                         .descricao(key)
