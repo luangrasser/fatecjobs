@@ -1,12 +1,10 @@
 package br.com.fatecjobs.fatecjobsbackend.dto;
 
 import br.com.fatecjobs.fatecjobsbackend.model.Aluno;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 
-import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class AlunoDto {
@@ -28,5 +26,9 @@ public class AlunoDto {
     private String tipoUsuario;
 
     private String cidade;
+
+    public static List<AlunoDto> convertList(List<Aluno> alunos) {
+        return alunos.stream().map(AlunoDto::new).collect(Collectors.toList());
+    }
 
 }

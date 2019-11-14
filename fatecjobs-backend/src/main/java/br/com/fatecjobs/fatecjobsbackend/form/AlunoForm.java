@@ -8,7 +8,6 @@ import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.HashMap;
 
 @Getter
 public class AlunoForm implements DataExchangeUsuario<Aluno> {
@@ -28,10 +27,6 @@ public class AlunoForm implements DataExchangeUsuario<Aluno> {
     private String tipoUsuario;
 
     private String cidade;
-
-    //Informação do aluno
-
-    private HashMap<String, Integer> competencias;
 
     //Informações da faculdade do aluno
 

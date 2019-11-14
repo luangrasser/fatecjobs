@@ -1,5 +1,6 @@
 package br.com.fatecjobs.fatecjobsbackend.service;
 
+import br.com.fatecjobs.fatecjobsbackend.form.AlunoForm;
 import br.com.fatecjobs.fatecjobsbackend.model.DataExchangeUsuario;
 import br.com.fatecjobs.fatecjobsbackend.model.Usuario;
 import br.com.fatecjobs.fatecjobsbackend.repository.UsuarioRepository;
@@ -28,5 +29,22 @@ public class UsuarioService {
                 .cidade(cidadeService.findByNome(form.getCidade()))
                 .build();
         return usuarioRepository.save(usuario);
+    }
+
+    public Usuario atualizar(Usuario usuario, AlunoForm form) {
+        if (!usuario.getNome().equals(form.getNome())) {
+            usuario.setNome(form.getNome());
+        }
+        if (!usuario.getEmail().equals(form.getEmail())) {
+            usuario.setEmail(form.getEmail());
+        }
+        String senhaEncriptada = new BCryptPasswordEncoder().encode(form.getSenha());
+        if (!usuario.getSenha().equals(senhaEncriptada)) {
+            usuario.setSenha(senhaEncriptada);
+        }
+        if (!usuario.getCidade().getNome().equals(form.getCidade())) {
+            usuario.setCidade(cidadeService.findByNome(form.getCidade()));
+        }
+        return usuario;
     }
 }

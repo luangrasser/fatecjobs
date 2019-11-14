@@ -1,17 +1,15 @@
 package br.com.fatecjobs.fatecjobsbackend.service;
 
+import br.com.fatecjobs.fatecjobsbackend.exception.UserFriendlyException;
 import br.com.fatecjobs.fatecjobsbackend.form.AlunoForm;
 import br.com.fatecjobs.fatecjobsbackend.model.Aluno;
-import br.com.fatecjobs.fatecjobsbackend.model.Cidade;
-import br.com.fatecjobs.fatecjobsbackend.model.TipoUsuario;
-import br.com.fatecjobs.fatecjobsbackend.model.Usuario;
 import br.com.fatecjobs.fatecjobsbackend.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AlunoService {
@@ -30,11 +28,32 @@ public class AlunoService {
         Aluno aluno = form.convert();
         aluno.setUsuario(usuarioService.criarUsuario(form));
         Aluno alunoSalvo = alunoRepository.save(aluno);
-        alunoSalvo.setCompetencias(competenciaService.criarListaCompetencias(form, alunoSalvo));
         faculdadeAlunoService.criarFaculdadeAluno(form, alunoSalvo);
         return alunoSalvo;
     }
 
+    public List<Aluno> pesquisar(String chave) {
+        return alunoRepository.findAllByNome(chave).orElse(null);
+    }
 
+    @Transactional
+    public Aluno atualizar(Integer id, AlunoForm form) throws UserFriendlyException {
+        Aluno aluno = findAlunoById(id);
+        aluno.setUsuario(usuarioService.atualizar(aluno.getUsuario(),form));
+        return aluno;
+    }
 
+    @Transactional
+    public void excluir(Integer id) throws UserFriendlyException {
+        Aluno aluno = findAlunoById(id);
+        alunoRepository.delete(aluno);
+    }
+
+    private Aluno findAlunoById(Integer id) throws UserFriendlyException {
+        Optional<Aluno> alunoOpt = alunoRepository.findById(id);
+        if (!alunoOpt.isPresent()) {
+            throw new UserFriendlyException("Aluno não encontrado.");
+        }
+        return alunoOpt.get();
+    }
 }
