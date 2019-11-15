@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fatecjobs_frontend/widgets/login.dart';
+import 'package:fatecjobs_frontend/widgets/selecionarCadastro.dart';
 
 void main() => runApp(MyApp());
 
