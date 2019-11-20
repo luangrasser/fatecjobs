@@ -1,6 +1,9 @@
 package br.com.fatecjobs.fatecjobsbackend.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,6 +18,7 @@ import java.util.Set;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -30,8 +34,7 @@ public class Usuario implements UserDetails {
 	private String senha;
 
 	@Transient
-	@Getter(AccessLevel.NONE)
-	private Set<Conexao> conexoes;
+	private List<Conexao> conexoes;
 
 	@ManyToOne
 	private TipoUsuario tipoUsuario;
@@ -75,10 +78,6 @@ public class Usuario implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
-	}
-
-	public Set<Conexao> getConexoes() {
-		return null;
 	}
 
 }

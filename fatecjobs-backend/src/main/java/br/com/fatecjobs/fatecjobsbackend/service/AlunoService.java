@@ -3,7 +3,9 @@ package br.com.fatecjobs.fatecjobsbackend.service;
 import br.com.fatecjobs.fatecjobsbackend.exception.UserFriendlyException;
 import br.com.fatecjobs.fatecjobsbackend.form.AlunoForm;
 import br.com.fatecjobs.fatecjobsbackend.model.Aluno;
+import br.com.fatecjobs.fatecjobsbackend.model.Usuario;
 import br.com.fatecjobs.fatecjobsbackend.repository.AlunoRepository;
+import br.com.fatecjobs.fatecjobsbackend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,8 @@ public class AlunoService {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
+    private UsuarioRepository usuarioRepository;
+    @Autowired
     private CompetenciaService competenciaService;
     @Autowired
     private FaculdadeAlunoService faculdadeAlunoService;
@@ -33,7 +37,7 @@ public class AlunoService {
     }
 
     public List<Aluno> pesquisar(String chave) {
-        return alunoRepository.findAllByNome(chave).orElse(null);
+        return alunoRepository.findByUsuarioNomeContaining(chave).orElse(null);
     }
 
     @Transactional
@@ -46,7 +50,9 @@ public class AlunoService {
     @Transactional
     public void excluir(Integer id) throws UserFriendlyException {
         Aluno aluno = findAlunoById(id);
+        Usuario usuario = aluno.getUsuario();
         alunoRepository.delete(aluno);
+        usuarioRepository.delete(usuario);
     }
 
     private Aluno findAlunoById(Integer id) throws UserFriendlyException {

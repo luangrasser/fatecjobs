@@ -2,6 +2,7 @@ package br.com.fatecjobs.fatecjobsbackend.controller;
 
 import br.com.fatecjobs.fatecjobsbackend.dto.TokenDto;
 import br.com.fatecjobs.fatecjobsbackend.form.LoginForm;
+import br.com.fatecjobs.fatecjobsbackend.model.Usuario;
 import br.com.fatecjobs.fatecjobsbackend.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +32,10 @@ public class AutenticacaoController {
         try {
             Authentication authentication = authManager.authenticate(dadosLogin);
             String token = tokenService.gerarToken(authentication);
-            return ResponseEntity.ok(new TokenDto(token, "Bearer"));
+            Usuario usuarioLogado = (Usuario) authentication.getPrincipal();
+            return ResponseEntity.ok(new TokenDto(token, "Bearer", usuarioLogado.getId()));
         } catch (AuthenticationException e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
