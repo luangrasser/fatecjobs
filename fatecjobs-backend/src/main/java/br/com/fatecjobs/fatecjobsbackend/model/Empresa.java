@@ -20,8 +20,9 @@ public class Empresa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank
 	private String setor;
+
+	private String cnpj;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "empresa", orphanRemoval = true)
 	private List<Vaga> vagasAbertas;
