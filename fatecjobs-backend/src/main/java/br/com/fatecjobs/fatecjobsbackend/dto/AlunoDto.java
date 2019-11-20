@@ -3,6 +3,7 @@ package br.com.fatecjobs.fatecjobsbackend.dto;
 import br.com.fatecjobs.fatecjobsbackend.model.Aluno;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,10 @@ public class AlunoDto {
     private String cidade;
 
     public static List<AlunoDto> convertList(List<Aluno> alunos) {
-        return alunos.stream().map(AlunoDto::new).collect(Collectors.toList());
+        if (alunos != null && !alunos.isEmpty()) {
+            return alunos.stream().map(AlunoDto::new).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
     }
 
 }

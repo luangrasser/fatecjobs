@@ -33,6 +33,7 @@ public class Usuario implements UserDetails {
 	private String senha;
 
 	@Column(columnDefinition = "bit(1) default 1", nullable = false)
+	@Builder.Default
 	private boolean ativo = true;
 
 	@Transient

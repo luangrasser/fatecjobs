@@ -5,6 +5,7 @@ import br.com.fatecjobs.fatecjobsbackend.exception.UserFriendlyException;
 import br.com.fatecjobs.fatecjobsbackend.form.AlunoForm;
 import br.com.fatecjobs.fatecjobsbackend.model.Aluno;
 import br.com.fatecjobs.fatecjobsbackend.service.AlunoService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/alunos")
+@Log4j2
 public class AlunoController {
 
     @Autowired
@@ -28,6 +30,7 @@ public class AlunoController {
             URI uri = uriBuilder.path("/alunos/{id}").buildAndExpand(aluno.getId()).toUri();
             return ResponseEntity.created(uri).body(new AlunoDto(aluno));
         } catch (Exception e) {
+            log.error("Falha ao salvar aluno.", e);
             return ResponseEntity.badRequest().build();
         }
     }
@@ -37,6 +40,7 @@ public class AlunoController {
         try {
             return ResponseEntity.ok(AlunoDto.convertList(alunoService.pesquisar(chave)));
         } catch (Exception e) {
+            log.error("Falha ao pesquisar alunos.", e);
             return ResponseEntity.badRequest().build();
         }
     }
@@ -46,20 +50,24 @@ public class AlunoController {
         try {
             return ResponseEntity.ok(new AlunoDto(alunoService.atualizar(id, form)));
         } catch (UserFriendlyException e) {
+            log.error(e.getMessage());
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
+            log.error("Falha ao atualizar aluno.", e);
             return ResponseEntity.badRequest().build();
         }
     }
 
-    @DeleteMapping("/excluir/{id}")
+    @PutMapping("/excluir/{id}")
     public ResponseEntity<?> excluir(@PathVariable Integer id) {
         try {
             alunoService.excluir(id);
             return ResponseEntity.ok().build();
         } catch (UserFriendlyException e) {
+            log.error(e.getMessage());
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
+            log.error("Falha ao excluir aluno.", e);
             return ResponseEntity.badRequest().build();
         }
     }
