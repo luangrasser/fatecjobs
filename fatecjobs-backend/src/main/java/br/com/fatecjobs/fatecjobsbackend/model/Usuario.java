@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
@@ -32,6 +31,9 @@ public class Usuario implements UserDetails {
 	private String email;
 
 	private String senha;
+
+	@Column(columnDefinition = "bit(1) default 1", nullable = false)
+	private boolean ativo = true;
 
 	@Transient
 	private List<Conexao> conexoes;

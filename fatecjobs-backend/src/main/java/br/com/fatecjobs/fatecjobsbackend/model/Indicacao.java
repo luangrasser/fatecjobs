@@ -3,6 +3,7 @@ package br.com.fatecjobs.fatecjobsbackend.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Indicacao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
