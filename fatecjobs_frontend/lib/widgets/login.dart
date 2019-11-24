@@ -1,3 +1,4 @@
+import 'package:fatecjobs_frontend/widgets/selecionarCadastro.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -18,7 +19,7 @@ class _LoginState extends State<Login> {
             children: <Widget>[
                TextField(
                 autofocus: true,
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.emailAddress,
                 style: TextStyle(color: Colors.blue, fontSize: 30),
                 decoration: InputDecoration(
                   labelText:"E-mail do Usuário",
@@ -36,6 +37,40 @@ class _LoginState extends State<Login> {
                   labelStyle: TextStyle(color: Colors.black),
                 )
               ),
+              Divider(),
+              ButtonTheme(
+                height: 60.0,
+                child: RaisedButton(
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder:(context)=>SelecionarCadastro())
+                    )
+                  },
+                    child: Text(
+                    "Não Possui Cadastro?Pressione",
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  ),
+                  color:Colors.black,   
+                )
+              ),
+              //Divider(),
+              //ButtonTheme(
+                //height: 60.0,
+                //child: RaisedButton(
+                  //onPressed: () => {
+                    //Navigator.push(
+                      //context,
+                      //MaterialPageRoute(builder:(context)=>Colocar())
+                    //)
+                  //},
+                    //child: Text(
+                    //"Esqueceu sua senha?Pressione",
+                    //style: TextStyle(color: Colors.white, fontSize: 30),
+                  //),
+                  //color:Colors.black,   
+                //)
+              //), 
               Divider(),
               ButtonTheme(
                 height: 60.0,
