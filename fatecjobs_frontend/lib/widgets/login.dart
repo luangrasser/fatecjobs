@@ -54,23 +54,25 @@ class _LoginState extends State<Login> {
                   color:Colors.black,   
                 )
               ),
-              //Divider(),
-              //ButtonTheme(
-                //height: 60.0,
-                //child: RaisedButton(
-                  //onPressed: () => {
-                    //Navigator.push(
-                      //context,
-                      //MaterialPageRoute(builder:(context)=>Colocar())
-                    //)
-                  //},
-                    //child: Text(
-                    //"Esqueceu sua senha?Pressione",
-                    //style: TextStyle(color: Colors.white, fontSize: 30),
-                  //),
-                  //color:Colors.black,   
-                //)
-              //), 
+              Divider(),
+              ButtonTheme(
+                height: 60.0,
+                child: RaisedButton(
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder:(context)=>EsqueceuSuaSenha())
+                    )
+                  },
+                    child: Text(
+                    "Esqueceu sua Senha?Pressione",
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  ),
+                  color:Colors.black,   
+                )
+              ),
+              
+              
               Divider(),
               ButtonTheme(
                 height: 60.0,
