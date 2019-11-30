@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fatecjobs_frontend/widgets/login.dart';
-import 'package:fatecjobs_frontend/widgets/selecionarCadastro.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +9,7 @@ class MyApp extends StatelessWidget{
   return MaterialApp(
     title:'Fatec Jobs',
     theme:ThemeData(primarySwatch: Colors.red),
-    home:Login(),
+    home:Login()
   );
   }
 }

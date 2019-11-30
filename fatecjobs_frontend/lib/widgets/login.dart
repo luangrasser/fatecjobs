@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fatecjobs_frontend/widgets/selecionarCadastro.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -8,7 +9,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.redAccent,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Center(
@@ -52,6 +53,23 @@ class _LoginState extends State<Login> {
                   color:Colors.black,
                 ),
               ),
+              Divider(),
+              ButtonTheme(
+                height: 30.0,
+                child: RaisedButton(
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context)=>SelecionarCadastro()) 
+                      )
+                  },
+                  child: Text(
+                    "Não possui cadastro? Pressione",
+                    style: TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                  color: Colors.black
+                ),
+              )
             ],
          ),
         ),
